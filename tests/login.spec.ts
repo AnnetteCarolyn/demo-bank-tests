@@ -39,7 +39,7 @@ test('unsuccessful login with login with too short password - locator name', asy
   
 });
 
-test('unsuccessful login with login with too short password - blur', async ({ page }) => {
+test.only('unsuccessful login with login with too short password - blur', async ({ page }) => {
   await page.goto('https://demo-bank.vercel.app/');
 
   // page.getByTestId('login-input') == page.locator('#login_id')
