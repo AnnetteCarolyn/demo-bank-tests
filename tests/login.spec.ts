@@ -25,7 +25,7 @@ test.describe('User login to Demobank', () => {
   });
 });
 
-test('unsuccessful login with login with too short password', async ({ page }) => {
+test('unsuccessful login with login with too short password - locator name', async ({ page }) => {
   await page.goto('https://demo-bank.vercel.app/');
 
   // page.getByTestId('login-input') == page.locator('#login_id')
@@ -38,3 +38,16 @@ test('unsuccessful login with login with too short password', async ({ page }) =
   await expect(page.getByTestId('error-login-password')).toHaveText('hasło ma min. 8 znaków');
   
 });
+
+test('unsuccessful login with login with too short password - blur', async ({ page }) => {
+  await page.goto('https://demo-bank.vercel.app/');
+
+  // page.getByTestId('login-input') == page.locator('#login_id')
+  await page.getByTestId('login-input').click(); 
+  await page.getByTestId('login-input').fill('testerPP');
+  await page.getByTestId('password-input').click();
+  await page.getByTestId('password-input').fill('wwwww');
+  await page.getByTestId('password-input').blur();
+
+  await expect(page.getByTestId('error-login-password')).toHaveText('hasło ma min. 8 znaków');
+})
