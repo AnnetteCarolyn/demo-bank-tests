@@ -49,7 +49,7 @@ hit twice <kbd>Ctrl</kbd> + <kbd>C</kbd>
     ```
 - describe:
     ```javascript
-     describe('Group description', () => {
+     test.describe('Group description', () => {
 
      });
     ```
