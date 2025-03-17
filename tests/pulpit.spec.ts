@@ -21,7 +21,7 @@ test.describe('Pulpit tests', () => {
     // await page.getByTestId('password-input').click();
     await page.getByTestId('password-input').fill(UserPassword);
     await page.getByTestId('login-button').click();
-    await page.waitForLoadState("domcontentloaded");
+    await page.waitForLoadState('domcontentloaded');
 
     await page.locator('#widget_1_transfer_receiver').selectOption(receiverID);
     await page.locator('#widget_1_transfer_amount').fill(transferAmount);
@@ -32,7 +32,9 @@ test.describe('Pulpit tests', () => {
     //   await page.getByRole('link', { name: 'Przelew wykonany! Chuck Demobankowy - 100,00PLN - pizza' }).click();
 
     //Assert
-    await expect(page.locator('#show_messages')).toHaveText(`Przelew wykonany! ${expectedTransferReceiver} - ${transferAmount},00PLN - ${transferTitle}`);
+    await expect(page.locator('#show_messages')).toHaveText(
+      `Przelew wykonany! ${expectedTransferReceiver} - ${transferAmount},00PLN - ${transferTitle}`,
+    );
   });
 
   test('successful mobile top-up', async ({ page }) => {
@@ -40,7 +42,9 @@ test.describe('Pulpit tests', () => {
     // await page.getByTestId('login-input').click();
     await page.getByTestId('login-input').fill('testerAW');
     await page.getByTestId('login-input').press('Tab');
-    await page.getByRole('link', { name: 'Demobank w sam raz do testów' }).press('Tab');
+    await page
+      .getByRole('link', { name: 'Demobank w sam raz do testów' })
+      .press('Tab');
     await page.getByTestId('password-input').fill('hhhhhhhh');
     await page.getByTestId('login-button').click();
     // await page.waitForLoadState("domcontentloaded");
@@ -56,12 +60,12 @@ test.describe('Pulpit tests', () => {
 
     //  await expect(page.locator('#ui-id-2')).toHaveText('Doładowanie wykonane');
 
-    await page.waitForLoadState("domcontentloaded");
+    await page.waitForLoadState('domcontentloaded');
     // await page.getByRole('link', { name: 'Doładowanie wykonane! 50,' }).click();
 
     // await.expect(page.locator('#ui-id-2')).toHaveText('Doładowanie wykonane');
-    await expect(page.locator('#show_messages')).toHaveText('Doładowanie wykonane! 50,00PLN na numer 503 xxx xxx');
+    await expect(page.locator('#show_messages')).toHaveText(
+      'Doładowanie wykonane! 50,00PLN na numer 503 xxx xxx',
+    );
   });
-
-
 });
