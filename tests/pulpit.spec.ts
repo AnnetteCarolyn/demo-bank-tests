@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Pulpit tests', () => {
   test.describe.configure({ retries: 3 });
-  test.only('quick payment with correct data', async ({ page }) => {
+  test('quick payment with correct data', async ({ page }) => {
     //Arrange
     const url = 'https://demo-bank.vercel.app/';
     const userID = 'testerLO';
