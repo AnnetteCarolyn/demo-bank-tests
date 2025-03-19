@@ -42,8 +42,8 @@ test.describe('Pulpit tests', () => {
     const url = 'https://demo-bank.vercel.app/';
     const userID = 'testerAW';
     const UserPassword = 'hhhhhhhh';
-    const chosenNumber = '503 xxx xxx'
-    const topupAmount = '50'
+    const chosenNumber = '503 xxx xxx';
+    const topupAmount = '50';
     const expectedMessage = `Doładowanie wykonane! ${topupAmount},00PLN na numer ${chosenNumber}`;
 
     //Act
@@ -56,7 +56,7 @@ test.describe('Pulpit tests', () => {
       .press('Tab');
     await page.getByTestId('password-input').fill(UserPassword);
     await page.getByTestId('login-button').click();
-    await page.waitForLoadState("domcontentloaded");
+    await page.waitForLoadState('domcontentloaded');
     await page.locator('#widget_1_topup_receiver').selectOption(chosenNumber);
     // await page.locator('#widget_1_topup_amount').click();
     await page.locator('#widget_1_topup_amount').fill(topupAmount);
@@ -73,8 +73,6 @@ test.describe('Pulpit tests', () => {
     // await.expect(page.locator('#ui-id-2')).toHaveText('Doładowanie wykonane');
 
     //Assert
-    await expect(page.locator('#show_messages')).toHaveText(
-      expectedMessage,
-    );
+    await expect(page.locator('#show_messages')).toHaveText(expectedMessage);
   });
 });

@@ -25,7 +25,7 @@ test.describe('User login to Demobank', () => {
     //Arrange
     const url = 'https://demo-bank.vercel.app/';
     const incorrectUserID = 'tester';
-    const expectedErrorLoginMessage = 'identyfikator ma min. 8 znaków'
+    const expectedErrorLoginMessage = 'identyfikator ma min. 8 znaków';
 
     //Act
     await page.goto(url);
@@ -33,9 +33,9 @@ test.describe('User login to Demobank', () => {
     await page.getByTestId('password-input').click();
 
     //Assert
-    await expect(page.getByTestId('error-login-id')).toHaveText
-      (expectedErrorLoginMessage);
-    
+    await expect(page.getByTestId('error-login-id')).toHaveText(
+      expectedErrorLoginMessage,
+    );
   });
 });
 
@@ -78,5 +78,7 @@ test('unsuccessful login with login with too short password - blur', async ({
   await page.getByTestId('password-input').blur();
 
   //Assert
-  await expect(page.getByTestId('error-login-password')).toHaveText(expectedErrorMessage);
+  await expect(page.getByTestId('error-login-password')).toHaveText(
+    expectedErrorMessage,
+  );
 });
