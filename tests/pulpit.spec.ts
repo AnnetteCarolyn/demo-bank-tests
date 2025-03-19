@@ -1,10 +1,14 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('Pulpit tests', () => {
+  test.beforeEach(async ({ page }) => {
+    const url = 'https://demo-bank.vercel.app/';
+    await page.goto(url);
+    });
   test.describe.configure({ retries: 3 });
+
   test('quick payment with correct data', async ({ page }) => {
     //Arrange
-    const url = 'https://demo-bank.vercel.app/';
     const userID = 'testerLO';
     const UserPassword = 'ljkjuytt';
 
@@ -14,7 +18,6 @@ test.describe('Pulpit tests', () => {
     const expectedTransferReceiver = 'Chuck Demobankowy';
 
     //Act
-    await page.goto(url);
     // await page.getByTestId('login-input').click();
     await page.getByTestId('login-input').fill(userID);
 
@@ -39,7 +42,6 @@ test.describe('Pulpit tests', () => {
 
   test('successful mobile top-up', async ({ page }) => {
     //Arrange
-    const url = 'https://demo-bank.vercel.app/';
     const userID = 'testerAW';
     const UserPassword = 'hhhhhhhh';
     const chosenNumber = '503 xxx xxx';
@@ -47,7 +49,6 @@ test.describe('Pulpit tests', () => {
     const expectedMessage = `Doładowanie wykonane! ${topupAmount},00PLN na numer ${chosenNumber}`;
 
     //Act
-    await page.goto(url);
     // await page.getByTestId('login-input').click();
     await page.getByTestId('login-input').fill(userID);
     await page.getByTestId('login-input').press('Tab');
