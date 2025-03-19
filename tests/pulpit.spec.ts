@@ -3,27 +3,25 @@ import { test, expect } from '@playwright/test';
 test.describe('Pulpit tests', () => {
   test.beforeEach(async ({ page }) => {
     const url = 'https://demo-bank.vercel.app/';
+    const userID = 'testerAW';
+    const UserPassword = 'hhhhhhhh';
+
     await page.goto(url);
-    });
+    await page.getByTestId('login-input').fill(userID);
+    await page.getByTestId('password-input').fill(UserPassword);
+    await page.getByTestId('login-button').click();
+  });
   test.describe.configure({ retries: 3 });
 
   test('quick payment with correct data', async ({ page }) => {
     //Arrange
-    const userID = 'testerLO';
-    const UserPassword = 'ljkjuytt';
-
     const receiverID = '2';
     const transferAmount = '100';
     const transferTitle = 'pizza';
     const expectedTransferReceiver = 'Chuck Demobankowy';
 
     //Act
-    // await page.getByTestId('login-input').click();
-    await page.getByTestId('login-input').fill(userID);
 
-    // await page.getByTestId('password-input').click();
-    await page.getByTestId('password-input').fill(UserPassword);
-    await page.getByTestId('login-button').click();
     await page.waitForLoadState('domcontentloaded');
 
     await page.locator('#widget_1_transfer_receiver').selectOption(receiverID);
@@ -42,21 +40,11 @@ test.describe('Pulpit tests', () => {
 
   test('successful mobile top-up', async ({ page }) => {
     //Arrange
-    const userID = 'testerAW';
-    const UserPassword = 'hhhhhhhh';
     const chosenNumber = '503 xxx xxx';
     const topupAmount = '50';
     const expectedMessage = `Doładowanie wykonane! ${topupAmount},00PLN na numer ${chosenNumber}`;
 
     //Act
-    // await page.getByTestId('login-input').click();
-    await page.getByTestId('login-input').fill(userID);
-    await page.getByTestId('login-input').press('Tab');
-    await page
-      .getByRole('link', { name: 'Demobank w sam raz do testów' })
-      .press('Tab');
-    await page.getByTestId('password-input').fill(UserPassword);
-    await page.getByTestId('login-button').click();
     await page.waitForLoadState('domcontentloaded');
     await page.locator('#widget_1_topup_receiver').selectOption(chosenNumber);
     // await page.locator('#widget_1_topup_amount').click();
