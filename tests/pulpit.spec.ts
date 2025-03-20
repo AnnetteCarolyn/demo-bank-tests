@@ -64,4 +64,32 @@ test.describe('Pulpit tests', () => {
     //Assert
     await expect(page.locator('#show_messages')).toHaveText(expectedMessage);
   });
+
+  test('correct balance after successful mobile top-up', async ({ page }) => {
+    //Arrange
+    const chosenNumber = '503 xxx xxx';
+    const topupAmount = '50';
+    const initialBalance = await page.locator('#money_value').innerText()
+    const expectedBalance = Number(initialBalance) - Number(topupAmount)
+
+    //Act
+    await page.waitForLoadState('domcontentloaded');
+    await page.locator('#widget_1_topup_receiver').selectOption(chosenNumber);
+    // await page.locator('#widget_1_topup_amount').click();
+    await page.locator('#widget_1_topup_amount').fill(topupAmount);
+    // await page.locator('#uniform-widget_1_topup_agreement span').click();
+    await page.locator('#widget_1_topup_agreement').click();
+    await page.getByRole('button', { name: 'doładuj telefon' }).click();
+    await page.getByText('Doładowanie wykonane!Kwota:').click();
+    //  await page.waitForLoadState("domcontentloaded");
+    await page.getByTestId('close-button').click();
+    //  await expect(page.locator('#ui-id-2')).toHaveText('Doładowanie wykonane');
+    await page.waitForLoadState('domcontentloaded');
+    // await page.getByRole('link', { name: 'Doładowanie wykonane! 50,' }).click();
+
+    // await.expect(page.locator('#ui-id-2')).toHaveText('Doładowanie wykonane');
+
+    //Assert
+    await expect(page.locator('#money_value')).toHaveText(`${expectedBalance}`);
+  });
 });
