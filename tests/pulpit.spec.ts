@@ -2,11 +2,10 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Pulpit tests', () => {
   test.beforeEach(async ({ page }) => {
-  
     const userID = 'testerAW';
     const UserPassword = 'hhhhhhhh';
 
-    await page.goto('/')
+    await page.goto('/');
     await page.getByTestId('login-input').fill(userID);
     await page.getByTestId('password-input').fill(UserPassword);
     await page.getByTestId('login-button').click();
@@ -69,8 +68,8 @@ test.describe('Pulpit tests', () => {
     //Arrange
     const chosenNumber = '503 xxx xxx';
     const topupAmount = '50';
-    const initialBalance = await page.locator('#money_value').innerText()
-    const expectedBalance = Number(initialBalance) - Number(topupAmount)
+    const initialBalance = await page.locator('#money_value').innerText();
+    const expectedBalance = Number(initialBalance) - Number(topupAmount);
 
     //Act
     await page.waitForLoadState('domcontentloaded');
