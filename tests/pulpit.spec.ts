@@ -1,6 +1,8 @@
 import { test, expect } from '@playwright/test';
 import { loginData } from '../test-data/login.data';
 import { LoginPage } from '../pages/login.page';
+import { PulpitPage } from '../pages/pulpit.page';
+import { PulpitData } from '../test-data/pulpit.data';
 
 test.describe('Pulpit tests', () => {
   test.beforeEach(async ({ page }) => {
@@ -8,36 +10,43 @@ test.describe('Pulpit tests', () => {
     const UserPassword = loginData.userPassword;
 
     await page.goto('/');
-     const loginPage = new LoginPage(page);
-        await loginPage.loginInput.fill(userID);
-        await loginPage.passwordInput.fill(UserPassword);
-        await loginPage.loginButton.click();
+    const loginPage = new LoginPage(page);
+
+    await loginPage.loginInput.fill(userID);
+    await loginPage.passwordInput.fill(UserPassword);
+    await loginPage.loginButton.click();
   });
   test.describe.configure({ retries: 3 });
 
-  test('quick payment with correct data', async ({ page }) => {
+  test.only('quick payment with correct data', async ({ page }) => {
     //Arrange
-    const receiverID = '2';
-    const transferAmount = '100';
-    const transferTitle = 'pizza';
-    const expectedTransferReceiver = 'Chuck Demobankowy';
+    const pulpitPage = new PulpitPage(page);
+    const transferReceiver = PulpitData.receiverID;
+    const transferAmount =  PulpitData.chosenAmount;
+    const transferTitle = PulpitData.chosenTitle;
+   // const expectedTransferReceiver = 'Chuck Demobankowy';
+    const transferConfirmation = PulpitData.expectedConfirmationText;
 
     //Act
-
     await page.waitForLoadState('domcontentloaded');
-
-    await page.locator('#widget_1_transfer_receiver').selectOption(receiverID);
-    await page.locator('#widget_1_transfer_amount').fill(transferAmount);
-    await page.locator('#widget_1_transfer_title').fill(transferTitle);
+    await pulpitPage.transferReceiver.click();
+    await pulpitPage.transferReceiver.selectOption(PulpitData.receiverID);
+    //await page.locator('#widget_1_transfer_receiver').selectOption(receiverID);
+    await pulpitPage.transferAmount.click();
+    await pulpitPage.transferAmount.fill(PulpitData.chosenAmount);
+   // await page.locator('#widget_1_transfer_amount').fill(transferAmount);
+   await pulpitPage.transferTitle.fill(PulpitData.chosenTitle);
+   // await page.locator('#widget_1_transfer_title').fill(transferTitle);
     await page.getByRole('button', { name: 'wykonaj' }).click();
     // await page.locator ('#execute_btn').click();
     await page.getByTestId('close-button').click();
     //   await page.getByRole('link', { name: 'Przelew wykonany! Chuck Demobankowy - 100,00PLN - pizza' }).click();
 
     //Assert
-    await expect(page.locator('#show_messages')).toHaveText(
-      `Przelew wykonany! ${expectedTransferReceiver} - ${transferAmount},00PLN - ${transferTitle}`,
-    );
+    await expect(pulpitPage.transferConfirmation).toHaveText(PulpitData.expectedConfirmationText('Chuck Demobankowy', PulpitData.chosenAmount, 'pizza'));
+   // await expect(page.locator('#show_messages')).toHaveText(
+    //  `Przelew wykonany! ${expectedTransferReceiver} - ${transferAmount},00PLN - ${transferTitle}`,
+    
   });
 
   test('successful mobile top-up', async ({ page }) => {
