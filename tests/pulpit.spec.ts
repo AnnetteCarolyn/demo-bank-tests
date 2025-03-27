@@ -5,12 +5,16 @@ import { PulpitPage } from '../pages/pulpit.page';
 import { PulpitData } from '../test-data/pulpit.data';
 
 test.describe('Pulpit tests', () => {
+  let pulpitPage: PulpitPage;
+
   test.beforeEach(async ({ page }) => {
     const userID = loginData.userID;
     const UserPassword = loginData.userPassword;
 
     await page.goto('/');
     const loginPage = new LoginPage(page);
+
+    pulpitPage = new PulpitPage(page);
 
     await loginPage.loginInput.fill(userID);
     await loginPage.passwordInput.fill(UserPassword);
@@ -20,7 +24,6 @@ test.describe('Pulpit tests', () => {
 
   test.only('quick payment with correct data', async ({ page }) => {
     //Arrange
-    const pulpitPage = new PulpitPage(page);
     const transferReceiver = PulpitData.receiverID;
     const transferAmount =  PulpitData.chosenAmount;
     const transferTitle = PulpitData.chosenTitle;

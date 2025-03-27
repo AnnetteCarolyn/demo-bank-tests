@@ -1,8 +1,6 @@
 import { Locator, Page } from '@playwright/test';
 
 export class LoginPage {
- 
-    
   
   loginInput: Locator;
   passwordInput: Locator;
@@ -20,4 +18,12 @@ export class LoginPage {
     this.loginError = this.page.getByTestId('error-login-id');
     this.passwordError = this.page.getByTestId('error-login-password');
   }
-}
+    async login(userId: string, userpassword: string): Promise<void> {
+    await this.loginInput.fill(userId);
+    await this.passwordInput.fill(userpassword);
+    await this.loginButton.click();
+
+    }
+
+  }
+
