@@ -6,4 +6,6 @@ export const PulpitData = {
   chosenTitle: 'pizza',
   expectedConfirmationText: (transferReceiver: string, transferAmount: string, transferTitle: string) =>
     `Przelew wykonany! ${transferReceiver} - ${transferAmount},00PLN - ${transferTitle}`,
+  topUpReceiver: '503 xxx xxx',
+  topUpAmount: '50'
 }
