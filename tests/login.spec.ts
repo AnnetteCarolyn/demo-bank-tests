@@ -5,28 +5,32 @@ import { PulpitPage } from '../pages/pulpit.page';
 import { PulpitData } from '../test-data/pulpit.data';
 
 test.describe('User login to Demobank', () => {
-let loginPage: LoginPage;
+  let loginPage: LoginPage;
 
   test.beforeEach(async ({ page }) => {
     await page.goto('/');
     loginPage = new LoginPage(page);
   });
 
-  test('successful login with correct credentials', async ({ page }) => {
-    //Arrange
-    const userID = loginData.userID;
-    const UserPassword = loginData.userPassword;
+  test(
+    'successful login with correct credentials',
+    { tag: ['@login', '@smoke'] },
+    async ({ page }) => {
+      //Arrange
+      const userID = loginData.userID;
+      const UserPassword = loginData.userPassword;
 
-    //Act
-    await loginPage.login(userID, UserPassword);
+      //Act
+      await loginPage.login(userID, UserPassword);
 
-    //Assert
-    const pulpitPage = new PulpitPage(page);
-    await page.waitForLoadState('domcontentloaded');
-    await expect(pulpitPage.userNameText).toHaveText(
-      PulpitData.expectedUserName,
-    );
-  });
+      //Assert
+      const pulpitPage = new PulpitPage(page);
+      await page.waitForLoadState('domcontentloaded');
+      await expect(pulpitPage.userNameText).toHaveText(
+        PulpitData.expectedUserName,
+      );
+    },
+  );
   ``;
   test('unsuccessful login with login with too short username', async ({
     page,
