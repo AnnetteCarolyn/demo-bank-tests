@@ -20,7 +20,15 @@ test.describe('Pulpit tests', () => {
   });
   test.describe.configure({ retries: 3 });
 
-  test('quick payment with correct data', async ({ page }) => {
+  test('quick payment with correct data',
+    {annotation:
+      [
+        {type: 'documentation',
+          description: 'https://jaktestowac.pl/course/playwright-wprowadzenie/'
+        },
+      ]
+    },
+    async ({ page }) => {
     //Arrange
 
     // const transferReceiver = PulpitData.receiverID;

@@ -38,7 +38,9 @@ test.describe('User login to Demobank', () => {
     },
   );
   ``;
-  test('unsuccessful login with login with too short username', async ({
+  test('unsuccessful login with login with too short username', 
+    {tag: '@unhappy_path'},
+    async ({
     page,
   }) => {
     //Arrange
@@ -78,7 +80,9 @@ test.describe('User login to Demobank', () => {
   //   );
   // });
 
-  test('unsuccessful login with login with too short password - blur', async ({
+  test('unsuccessful login with login with too short password - blur', 
+    {tag: '@unhappy_path'},
+    async ({
     page,
   }) => {
     //Arrange
