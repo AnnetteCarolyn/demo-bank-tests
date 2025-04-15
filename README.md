@@ -98,7 +98,7 @@ To quickly evaluate code use `DEBUG CONSOLE`.
       video: {'retain-on-failure'},
   },
   ```
-- enable Trace Viewer on fial
+- enable Trace Viewer on file
   ```javascript
   use: {
       trace: {'retain-on-failure'},
@@ -125,7 +125,7 @@ To quickly evaluate code use `DEBUG CONSOLE`.
   ```
 - hook beforeEach:
   ```typescript
-  test.befoerEach('async ({ page }) => {
+  test.beforeEach('async ({ page }) => {
     //your code
   });
   ```
@@ -152,7 +152,7 @@ To quickly evaluate code use `DEBUG CONSOLE`.
   `npm install --save-dev --save-exact prettier`
 - configure Prettier
 
-  - exlude files in `.prettierignore`
+  - exclude files in `.prettierignore`
 
     ```
     package-lock.json
@@ -171,7 +171,7 @@ To quickly evaluate code use `DEBUG CONSOLE`.
 
 - run Prettier  
   `npx prettier --write .`
-- additionaly you can install VSC extension: **Prettier**
+- additionally you can install VSC extension: **Prettier**
 
 ### package.json example scripts
 
@@ -184,6 +184,9 @@ To quickly evaluate code use `DEBUG CONSOLE`.
 
 Scripts can be run in standard and debug mode by:
 
-- hovering over script name and using opition **Run**
+- hovering over script name and using option **Run**
 - entering command `npm run script_name` i.e. `npm run test`
 - using `NPM Scripts` tab in **Explorer** view (need to be enabled in **EXPLORER** settings)
+
+// NOTES
+//normalnie npx odpalamy, a jak z konsoli lub skryptu to komenda npm, np. npm run test
