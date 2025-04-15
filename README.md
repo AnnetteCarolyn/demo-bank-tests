@@ -1,11 +1,13 @@
-# Test Automation training from Bartosz Kita's course "Automatyzacja testów od podstaw"
+# Test Automation training from jaktestowac.pl
 
-This is a Test Automation project based on `Playwright` and `TypeScript`. The tested page is a simple website.
+This is a Test Automation project based on `Playwright` and `TypeScript`. The tested page is a simple demo of a bank.
 
-## Link
+## Links
 
-- test site https://the-internet.herokuapp.com  
-
+- course https://jaktestowac.pl/course/playwright-wprowadzenie/
+- test site https://demo-bank.vercel.app/  
+  if link is broken check https://jaktestowac.pl/lesson/pw1s01l01/
+- code repository https://github.com/jaktestowac/playwright_automatyzacja_wprowadzenie
 
 ## Commands
 
@@ -14,7 +16,7 @@ This is a Test Automation project based on `Playwright` and `TypeScript`. The te
 - new project with Playwright  
   `npm init playwright@latest`
 - record tests for given site  
-  `npx playwright codegen https://the-internet.herokuapp.com`
+  `npx playwright codegen https://demo-bank.vercel.app/`
 - run tests without browser GUI  
   `npx playwright test`
 - run tests with browser GUI  
