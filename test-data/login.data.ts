@@ -1,5 +1,5 @@
 export const loginData = {
-  userID: 'testerAW',
-  userPassword: 'ljkjuytt',
+  userID: 'tomsmith123',
+  userPassword: 'SuperSecretPassword!',
 };
 
