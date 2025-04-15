@@ -1,10 +1,9 @@
-# Test Automation training from jaktestowac.pl
+# Test Automation training from Bartosz Kita's course "Automatyzacja testów od podstaw"
 
 This is a Test Automation project based on `Playwright` and `TypeScript`. The tested page is a simple website.
 
-## Links
+## Link
 
-- course Bartosz Kita Automatyzacja testów od podstaw
 - test site https://the-internet.herokuapp.com  
 
 
